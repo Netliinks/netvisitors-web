@@ -5,6 +5,7 @@
 //
 import { getUserInfo } from "./endpoints.js";
 import { renderLayout } from "./layout/interface.js";
+import { registerWebLogin } from "./registerWebLogin.js";
 const loginContainer = document.getElementById('login-container');
 const app = document.getElementById('app');
 export const renderLogin = async () => {
@@ -12,7 +13,7 @@ export const renderLogin = async () => {
     loginContainer.innerHTML = `
     <div class="login_window">
       <div class="login_header">
-        <img src="./public/src/assets/pictures/login_logo.png">
+        <img src="./public/src/assets/pictures/app_logo.png">
         <h1 class="login_title">Iniciar Sesión</h1>
         <p>Inicie sesión con los datos proporcionados por el proveedor.</p>
       </div>
@@ -77,6 +78,7 @@ export const checkToken = async () => {
     else {
         app.style.display = 'block';
         loginContainer.style.display = 'none';
+        registerWebLogin();
         renderLayout();
     }
 };
