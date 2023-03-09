@@ -27,14 +27,18 @@ export const getToken = async (mail, password) => {
  * customers, guards and more
  */
 export const getUserInfo = async () => {
-    const URL = 'https://backend.netliinks.com:443/rest/userInfo';
-    let ReqOptions = {
-        method: 'GET',
+    const userInfo = {
+        url: 'https://backend.netliinks.com:443/rest/userInfo?fetchPlan=full',
+        method: 'GET'
+    };
+    const options = {
+        method: userInfo.method,
         headers: headers,
         redirect: 'follow'
     };
-    const res = await fetch(URL, ReqOptions);
-    return await res.json();
+    return fetch(userInfo.url, options)
+        .then((req) => req.json())
+        .catch((err) => console.info(err));
 };
 /**
  *
@@ -60,7 +64,7 @@ export const getData = async (url) => {
  * entity (all bussines data for example).
  */
 export const getEntitiesData = async (entities) => {
-    const URL = `${NetliinksUrl}${entities}?fetchPlan=full`;
+    const URL = `${NetliinksUrl}${entities}?fetchPlan=full&orderby=createdDate`;
     return await getData(URL);
 };
 /**
@@ -71,7 +75,7 @@ export const getEntitiesData = async (entities) => {
  * @returns all data of specified entity.
  */
 export const getEntityData = async (entities, entity) => {
-    const URL = `${NetliinksUrl}${entities}/${entity}?fetchPlan=full`;
+    const URL = `${NetliinksUrl}${entities}/${entity}?fetchPlan=full&orderby=createdDate`;
     return getData(URL);
 };
 export const updateEntity = async (entities, entity, raw) => {
@@ -97,5 +101,32 @@ export const deleteEntity = async (entities, entity) => {
         .then(res => res.json())
         .catch(err => console.error('Error: ', err));
 };
-export const registerEntity = async () => { };
-export const filterEntities = async () => { };
+export const registerEntity = async (raw) => {
+    const req = {
+        url: 'https://backend.netliinks.com:443/rest/entities/User',
+        method: 'POST'
+    };
+    const requestOptions = {
+        method: req.method,
+        headers: headers,
+        body: raw,
+        redirect: 'follow'
+    };
+    fetch(req.url, requestOptions)
+        .then((req) => req.json())
+        .then(req => (console.log(req)))
+        .catch((err) => console.info(err));
+};
+export const filterEntities = async (user) => { };
+export const setPassword = async (user) => {
+    const req = {
+        url: 'https://backend.netliinks.com:443/rest/services/UserServiceBean/updatePassword',
+        method: 'POST'
+    };
+    const requestOptions = {
+        method: req.method,
+        headers: headers,
+        body: user,
+        redirect: 'follow'
+    };
+};

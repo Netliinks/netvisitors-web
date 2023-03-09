@@ -20,6 +20,8 @@
   font-smooth: all;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 body, html, .app, input, a, p, button, select, table, td, tr, th {
@@ -270,9 +272,7 @@ table button:hover {
   background-color: #5DBD51;
   color: #FFFFFF;
 }
-.datatable_tools .datatable_button .feather {
-  height: 16px;
-  width: 16px;
+.datatable_tools .datatable_button .fa-solid {
   color: #FFFFFF;
 }
 .datatable_content {
@@ -627,6 +627,10 @@ h1, h2, h3, h4, h5, h6 {
   width: 100%;
   margin-bottom: 24px;
 }
+.input_locked {
+  height: 12px;
+  width: 12px;
+}
 .input input {
   appearance: none;
   -webkit-appearance: none;
@@ -655,12 +659,10 @@ h1, h2, h3, h4, h5, h6 {
   height: 1px;
   width: 100%;
 }
-.input .feather {
-  height: 18px;
-  margin-right: 8px;
-  color: #706F8E;
-  bottom: 8px;
+.input .fa-regular {
   position: absolute;
+  bottom: 8px;
+  color: #706F8E;
 }
 
 .material_input {
@@ -732,6 +734,7 @@ h1, h2, h3, h4, h5, h6 {
   width: fit-content;
   border-radius: 8px;
   z-index: 10;
+  box-shadow: 0 2px 8px -4px rgba(0, 0, 0, 0.2);
 }
 .material_input_select .input_options_container {
   padding: 4px;
@@ -779,6 +782,10 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 4px;
   cursor: pointer;
   transition: 0.3s all ease-in-out;
+}
+.app .sidebar_item span .fa-regular {
+  font-size: 22px;
+  margin-right: 8px;
 }
 .app .sidebar_item span .feather {
   height: 22px;
@@ -839,7 +846,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 .app {
   display: grid;
-  grid-template-columns: 200px 1fr;
+  grid-template-columns: 180px 1fr;
   height: 100vh;
 }
 
@@ -973,14 +980,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 .login_footer .login_icons {
   display: block;
-  margin: 24px auto 0px auto;
+  margin: 24px auto 16px auto;
   width: fit-content;
 }
-.login_footer .login_icons .feather {
-  display: inline-block;
-  margin: 0 4px;
-  height: 16px;
+.login_footer .login_icons .fa-regular {
+  font-size: 18px;
   color: #26233A;
+  margin: 0 4px;
 }
 .login_footer p {
   text-align: center;
@@ -1010,48 +1016,50 @@ h1, h2, h3, h4, h5, h6 {
 @media screen and (max-width: 1024px) {
   .app {
     display: grid;
-    grid-template-columns: 65px 1fr;
+    grid-template-columns: 75px 100%;
     height: 100vh;
   }
-  .app_sidebar {
-    padding: 8px;
-  }
-  .app_sidebar_item {
-    width: 100% !important;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .app_sidebar_item .feather {
-    height: 32px;
-    width: 32px;
-    margin: 0;
-  }
-  .app_sidebar #app_sidebar_label {
-    display: none !important;
-  }
-}
-@media screen and (max-width: 800px) {
-  .app {
-    display: grid;
-    grid-template-columns: 65px 1fr;
-    height: 100vh;
+  .app_topbar {
+    max-width: 90%;
   }
   .app_sidebar {
-    padding: 8px;
+    background-color: #26233A;
+    height: 100%;
+    max-width: 100%;
+    overflow-y: scroll;
   }
-  .app_sidebar_item {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .app_sidebar_container {
+    width: 100%;
   }
-  .app_sidebar_item .feather {
+  .app .sidebar_item span {
+    display: block;
+    padding: 16px 16px;
+    margin: 8px auto;
+  }
+  .app .sidebar_item span .feather {
+    stroke-width: 1.5;
     height: 32px;
     width: 32px;
-    margin: 0;
   }
-  .app_sidebar #app_sidebar_label {
-    display: none !important;
+  .app .sidebar_item span .label {
+    display: none;
+  }
+  .datatable_content {
+    display: block;
+    overflow-x: scroll;
+  }
+  .dashboard_datefilter {
+    display: none;
+  }
+  .dashboard_content {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: fit-content fit-content !important;
+    padding: 0;
+  }
+  #datatable-container {
+    display: block;
+    width: 100%;
+    max-width: 90%;
   }
 }
 

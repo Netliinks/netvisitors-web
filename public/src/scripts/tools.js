@@ -27,6 +27,8 @@ export const inputSelect = async (entity, selectId, currentStatus) => {
     optionsContent.appendChild(optionsContainer);
     for (let i = 0; i < data.length; i++) {
         const inputOption = document.createElement('div');
+        select.setAttribute('data-optionid', data[0].id);
+        select.setAttribute('value', data[0].name);
         inputOption.classList.add('input_option');
         inputOption.setAttribute('id', data[i].id);
         inputOption.innerHTML = data[i].name;
@@ -94,5 +96,39 @@ export const drawTagsIntoTables = () => {
             tag.innerText = "Inactivo";
             tag.classList.add("tag_gray");
         }
+    });
+};
+export class CloseDialog {
+    x(dialog, container) {
+        container.style.display = 'none';
+        dialog.remove();
+    }
+}
+// SIDEBAR RENDERING TOOLS
+export const renderRightSidebar = (UIFragment) => {
+    const dialogContainer = document.getElementById('entity-editor-container');
+    dialogContainer.innerHTML = '';
+    dialogContainer.style.display = 'block';
+    dialogContainer.innerHTML = UIFragment;
+};
+export const fixDate = () => {
+    const arrayDates = document.querySelectorAll('#table-date');
+    arrayDates.forEach((date) => {
+        const dateP1 = date.innerText.split('-');
+        const dateP2 = dateP1[2].split('T');
+        const dateP3 = dateP2[1].split(':');
+        // TODO: Change months for month names
+        // switch (dateP1[1]) {
+        //   case 01 = console.log('sies')
+        // }
+        const YearDate = dateP1[0];
+        const MonthDate = dateP1[1];
+        const DayDate = dateP2[0];
+        const Hours = dateP3[0];
+        const Minutes = dateP3[1];
+        const Seconds = dateP3[2];
+        const DT = YearDate + ' ' + MonthDate + ' ' + DayDate;
+        const Time = Hours + ':' + Minutes + ':' + Seconds.slice(0, 2);
+        date.innerText = DT + ' ' + Time;
     });
 };
